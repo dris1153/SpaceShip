@@ -12,7 +12,9 @@ body {
     src: url("font/Games-Italic.ttf");
 }
 
+
 #readyScreen {
+
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -104,7 +106,7 @@ button {
 
 
 h1 {
-	margin-top: 25vh;
+	margin-top: 20vh;
 	color: white;
 	font-family: 'Games', sans-serif;
 	font-size: 75px;
@@ -145,4 +147,29 @@ button:hover {
 
 .itemGrid {
 	margin: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+	#readyScreen {
+		padding: 5px;	
+	}
+	#FinishGame {
+		padding: 5px;
+	}
+	#settingScreen {
+		padding: 5px;
+	}
+	#changeSpaceShip {
+		padding: 5px;
+	}
+	h1 {
+		margin-top: 15vh;
+		font-size: 50px;
+	}
+	#chooseCharSpaceShip {
+		grid-template-columns: auto auto auto;
+	}
+	.itemGrid {
+		margin: 10px;
+	}
 }
