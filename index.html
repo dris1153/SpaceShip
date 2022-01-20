@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Spaceship Game</title>
+	<link href="http://fonts.cdnfonts.com/css/games" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
@@ -27,6 +28,8 @@
 		<input id = "shotVolume" class = "volume" type="range" value="100" min="0" max="100" oninput="document.getElementById('shotVolume_label').innerHTML = 'Shot volume (' + this.value/100 + ')'" />
 		<label id="boomVolume_label">Boom volume (100)</label>
 		<input id = "boomVolume" class = "volume" type="range" value="100" min="0" max="100" oninput="document.getElementById('boomVolume_label').innerHTML = 'Boom volume (' + this.value/100 + ')'" />
+		<button>Change bullet</button>
+		<button onclick="ChangeSpaceShip ()">Change Spaceship</button>
 		<div style="display: flex;">
 			<button class="buttonSetting" id="ReturnSetting" onclick="{
 				document.getElementById ('settingScreen').style.display = 'none';
@@ -34,7 +37,18 @@
 			}">Return</button>
 			<button class="buttonSetting" id="ApplySetting" onclick="Apply()">Confirm</button>
 		</div>
-		
+	</div>
+	<div id="changeSpaceShip" style="display: none">
+		<h1>Choose SpaceShip</h1>
+		<div id="chooseCharSpaceShip">
+		</div>
+		<div style="display: flex;">
+			<button class="buttonSetting"  style="background-color: red !important;" onclick="{
+				document.getElementById ('changeSpaceShip').style.display = 'none';
+				document.getElementById ('settingScreen').style.display = 'flex';				
+			}">Return</button>
+			<button class="buttonSetting" style="background-color: #4dba58 !important;" onclick="ApplySpaceShip ()">Confirm</button>
+		</div>
 	</div>
 	<canvas id="canvas" style="display: none"></canvas>
 	<audio id="audioBG" style="display: none" controls="" autoplay>
@@ -47,6 +61,7 @@
 		<source src="Boom.mp3" type="audio/mpeg">
 	</audio>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="jquery/jquery.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
