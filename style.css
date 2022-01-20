@@ -7,6 +7,11 @@ body {
 	background-color: black;
 }
 
+@font-face {
+    font-family: "Games";
+    src: url("font/Games-Italic.ttf");
+}
+
 #readyScreen {
 	display: flex;
 	align-items: center;
