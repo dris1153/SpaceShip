@@ -4,11 +4,17 @@ const ctx = canvas.getContext ("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+var SpaceShipArr = ["SpaceShip.png","Cat.png","Run.png","Aries.png","UFO.png"]
+var SpaceShipImg = "radio0";
+
+
 var spaceShip = [];
 var bullets = [];
 
+init ();
+
 base_image = new Image();
-base_image.src = 'SpaceShip.png';
+base_image.src = document.getElementById(SpaceShipImg).value;
 base_image.onload;
 
 boom_image = new Image();
@@ -18,6 +24,15 @@ boom_image.onload;
 var shotVolume = 100;
 var backgroundVolume = 100;
 var boomVolume = 100;
+
+function init () {
+	SpaceShipArr.forEach ((item, index) => {
+			$("#chooseCharSpaceShip").append (
+				'<label class="itemGrid"><input id="radio'+index+'" type="radio" name="SpaceShipName" value="SpaceShip/'+SpaceShipArr[index]+'"><img src="SpaceShip/'+SpaceShipArr[index]+'"></label>'
+			);
+	});
+	//document.getElementById("radio0").checked = true;
+}
 
 
 const mouse = {
@@ -168,8 +183,25 @@ function Setting() {
 	document.getElementById('backgroundVolume_label').innerHTML = 'Background volume (' + backgroundVolume/100 + ')';
 	document.getElementById('shotVolume_label').innerHTML = 'Shot volume (' + shotVolume/100 + ')';
 	document.getElementById('boomVolume_label').innerHTML = 'Boom volume (' + boomVolume/100 + ')';
+	
 }
 
+function ChangeSpaceShip () {
+	document.getElementById ('settingScreen').style.display = 'none';	
+	document.getElementById ('changeSpaceShip').style.display = 'flex';	
+	document.getElementById(SpaceShipImg).checked = true;
+}
+
+function ApplySpaceShip () {
+	SpaceShipImg = document.querySelector('input[name="SpaceShipName"]:checked').id;
+	base_image.src = document.getElementById(SpaceShipImg).value;
+	base_image.onload;
+	Swal.fire(
+	  'Successful Confirmation',
+	  'Successful confirmation, press "Return" to return to the setting screen.',
+	  'success'
+	)
+}
 
 
 var frameAlert = 50;
@@ -210,28 +242,20 @@ var Shoter = true;
 
 window.addEventListener ("click", function (event) {
 	if (canvas.style.display != "none") {
-		if (event.clientX > window.innerWidth / 3) {
-				alertGame ();
-				stringAlert = "Shoot outside the allowed range";
-				widthAlert = 310;
-				alertColor = "rgba(255, 99, 71, 0.1)";
-			}
+		if (Shoter) {
+			Shoter = false;
+			setTimeout (() => {
+				Shoter = true;
+			},750);
+			CreatBullet (0, event.clientY);
+			shotAudio.load();
+			shotAudio.play();
+		}
 		else {
-			if (Shoter) {
-				Shoter = false;
-				setTimeout (() => {
-					Shoter = true;
-				},750);
-				CreatBullet (event.clientX, event.clientY);
-				shotAudio.load();
-				shotAudio.play();
-			}
-			else {
-				alertGame ();
-				stringAlert = "You shoot bullets too fast";
-				widthAlert = 250;
-				alertColor = "rgba(255, 99, 71, 0.1)";		
-			}
+			alertGame ();
+			stringAlert = "You shoot bullets too fast";
+			widthAlert = 250;
+			alertColor = "rgba(255, 99, 71, 0.1)";		
 		}
 	}
 });
