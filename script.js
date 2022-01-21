@@ -1,15 +1,16 @@
 const canvas = document.querySelector ("canvas");
 const ctx = canvas.getContext ("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-var SpaceShipArr = ["SpaceShip.png","Cat.png","Run.png","Aries.png","UFO.png"]
+var SpaceShipArr = ["SpaceShip.png","Cat.png","Run.png","Aries.png","UFO.png","Monster.png"];
 var SpaceShipImg = "radio0";
 
+const LevelBTN = document.querySelectorAll (".LevelBTN");
 
 var spaceShip = [];
 var bullets = [];
+
+var temp_Level = 2;
+var Level = 2;
 
 init ();
 
@@ -83,10 +84,12 @@ var TimeCreateSpaceShip = 2010;
 
 function LevelUp () {
 	if (CanPlay) {
-		setTimeout (LevelUp,10000);
-		if (TimeCreateSpaceShip > 1000)
-			TimeCreateSpaceShip -= 10;
-		speedSpaceShip += 0.1;
+		setTimeout (LevelUp,20000/Level);
+		if (CreatFrame) {
+			if (TimeCreateSpaceShip > 1000)
+				TimeCreateSpaceShip -= 10;
+			speedSpaceShip += 0.1;
+		}
 	}
 }
 
@@ -161,7 +164,16 @@ function animate() {
 window.addEventListener('focus', () => CreatFrame = true);
 window.addEventListener('blur', () => CreatFrame = false);
 
+function setCanvas () {
+	if (canvas.width != window.innerWidth || canvas.height != window.innerHeight) {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	}
+	setTimeout (setCanvas,1000);
+}
+
 function PlayGame () {
+	setCanvas ();
 	CreatFrame = true;
 	CanPlay = true;
 	document.querySelector ("#readyScreen").style.display = "none";
@@ -172,6 +184,7 @@ function PlayGame () {
 	myAudio.play ();
 	document.body.style.backgroundColor = "white";
 	LevelUp ();
+	CanShot ();
 }
 
 function Setting() {
@@ -183,7 +196,6 @@ function Setting() {
 	document.getElementById('backgroundVolume_label').innerHTML = 'Background volume (' + backgroundVolume/100 + ')';
 	document.getElementById('shotVolume_label').innerHTML = 'Shot volume (' + shotVolume/100 + ')';
 	document.getElementById('boomVolume_label').innerHTML = 'Boom volume (' + boomVolume/100 + ')';
-	
 }
 
 function ChangeSpaceShip () {
@@ -203,6 +215,14 @@ function ApplySpaceShip () {
 	)
 }
 
+function ApplyLevel () {
+	Level = temp_Level;
+	Swal.fire(
+	  'Successful Confirmation',
+	  'Successful confirmation, press "Return" to return to the setting screen.',
+	  'success'
+	)
+}
 
 var frameAlert = 50;
 var alertColor;
@@ -239,6 +259,22 @@ function Apply () {
 }
 
 var Shoter = true;
+var TimeRevive = 750;
+
+function CanShot () {
+	if (CanPlay) {
+		requestAnimationFrame(CanShot);
+		ctx.font = "25px PermanentMarker-Regular";
+		if (Shoter) {
+			ctx.fillStyle = "green";
+			ctx.fillText("YES", window.innerWidth - 50, window.innerHeight - 15);
+		}
+		else {
+			ctx.fillStyle = "red";
+			ctx.fillText("NO", window.innerWidth - 45, window.innerHeight - 15);
+		}
+	}
+}
 
 window.addEventListener ("click", function (event) {
 	if (canvas.style.display != "none") {
@@ -265,3 +301,12 @@ window.addEventListener("keydown", function(event) {
         Finish ();
     }
 });
+
+
+function ChooseLevel (number) {
+	temp_Level = number;
+	LevelBTN.forEach ((btn) => {
+		btn.style.backgroundColor = "#bf9000";
+	});
+	LevelBTN[number-1].style.backgroundColor = "#990000";
+}
