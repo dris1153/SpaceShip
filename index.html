@@ -29,6 +29,14 @@
 		<input id = "boomVolume" class = "volume" type="range" value="100" min="0" max="100" oninput="document.getElementById('boomVolume_label').innerHTML = 'Boom volume (' + this.value/100 + ')'" />
 		<button>Change bullet</button>
 		<button onclick="ChangeSpaceShip ()">Change Spaceship</button>
+		<button onclick="{
+				document.getElementById ('settingScreen').style.display = 'none';
+				document.getElementById ('setLevel').style.display = 'flex';	
+				LevelBTN[Level-1].style.backgroundColor = '#990000';
+				temp_Level = Level;		
+				ChooseLevel (Level);
+		}">Set Level</button>
+		<div></div>
 		<div style="display: flex;">
 			<button class="buttonSetting" id="ReturnSetting" onclick="{
 				document.getElementById ('settingScreen').style.display = 'none';
@@ -47,6 +55,20 @@
 				document.getElementById ('settingScreen').style.display = 'flex';				
 			}">Return</button>
 			<button class="buttonSetting" style="background-color: #4dba58 !important;" onclick="ApplySpaceShip ()">Confirm</button>
+		</div>
+	</div>
+	<div id="setLevel" style="display: none">
+		<button class="LevelBTN" id="Level1" onclick="ChooseLevel (1)">Level 1</button>
+		<button class="LevelBTN" id="Level2" onclick="ChooseLevel (2)">Level 2</button>
+		<button class="LevelBTN" id="Level3" onclick="ChooseLevel (3)">Level 3</button>
+		<button class="LevelBTN" id="Level4" onclick="ChooseLevel (4)">Level 4</button>
+		<button class="LevelBTN" id="Level5" onclick="ChooseLevel (5)">Level 5</button>
+		<div style="display: flex;">
+			<button class="buttonSetting"  style="background-color: red !important;" onclick="{
+				document.getElementById ('setLevel').style.display = 'none';
+				document.getElementById ('settingScreen').style.display = 'flex';				
+			}">Return</button>
+			<button class="buttonSetting" style="background-color: #4dba58 !important;" onclick="ApplyLevel ()">Confirm</button>
 		</div>
 	</div>
 	<canvas id="canvas" style="display: none"></canvas>
