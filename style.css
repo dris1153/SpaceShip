@@ -12,6 +12,11 @@ body {
     src: url("font/Games-Italic.ttf");
 }
 
+@font-face {
+	font-family: "PermanentMarker-Regular";
+  	src: url("font/PermanentMarker-Regular.ttf");
+}
+
 
 #readyScreen {
 
@@ -47,6 +52,24 @@ body {
 	width: 100vw;
 	height: 100vh;
 	color: white;
+}
+
+#setLevel {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	color: white;
+}
+
+#setLevel button {
+	background-color: #bf9000;
+}
+
+#setLevel button:hover {
+	background-color: #b45f06;
 }
 
 #settingScreen button {
@@ -88,6 +111,13 @@ button {
 	font-family: "Arials",sans-serif;
 	background-color: #1a8bdf;
 	margin: 10px 20px;
+	box-shadow: 0 9px #999;
+}
+
+.buttonSetting:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 #ReturnSetting {
@@ -172,4 +202,8 @@ button:hover {
 	.itemGrid {
 		margin: 10px;
 	}
+}
+
+.hidden {
+	display: none;
 }
