@@ -161,8 +161,14 @@ function animate() {
 
 
 
-window.addEventListener('focus', () => CreatFrame = true);
-window.addEventListener('blur', () => CreatFrame = false);
+window.addEventListener('focus', () => {
+	CreatFrame = true;
+	if (canvas.style.display != "none") myAudio.play ();
+});
+window.addEventListener('blur', () => {
+	CreatFrame = false;
+	if (canvas.style.display != "none") myAudio.pause ();
+});
 
 function setCanvas () {
 	if (canvas.width != window.innerWidth || canvas.height != window.innerHeight) {
