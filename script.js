@@ -32,6 +32,14 @@ function init () {
 				'<label class="itemGrid"><input id="radio'+index+'" type="radio" name="SpaceShipName" value="SpaceShip/'+SpaceShipArr[index]+'"><img src="SpaceShip/'+SpaceShipArr[index]+'"></label>'
 			);
 	});
+	/*for (var i=1; i<6; i++) {
+	
+	}
+			<button class="LevelBTN" id="Level1" onclick="ChooseLevel (1)">Level 1</button>
+		<button class="LevelBTN" id="Level2" onclick="ChooseLevel (2)">Level 2</button>
+		<button class="LevelBTN" id="Level3" onclick="ChooseLevel (3)">Level 3</button>
+		<button class="LevelBTN" id="Level4" onclick="ChooseLevel (4)">Level 4</button>
+		<button class="LevelBTN" id="Level5" onclick="ChooseLevel (5)">Level 5</button>*/
 	//document.getElementById("radio0").checked = true;
 }
 
