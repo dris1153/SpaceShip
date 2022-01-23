@@ -22,7 +22,7 @@ body {
 }
 
 
-#readyScreen {
+#readyScreen, #FinishGame, #settingScreen, #changeSpaceShip, #setLevel {
 
 	display: flex;
 	align-items: center;
@@ -31,42 +31,15 @@ body {
 	height: 100vh;
 }
 
-#FinishGame {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
-}
-
-#settingScreen {
-	display: flex;
-	align-items: center;
+#settingScreen, #setLevel {
 	justify-content: center;
-	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
 	color: white;
 }
 
 #changeSpaceShip {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
 	color: white;
 }
 
-#setLevel {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
-	width: 100vw;
-	height: 100vh;
-	color: white;
-}
 
 #setLevel button {
 	background-color: #bf9000;
@@ -183,26 +156,30 @@ button:hover {
 	margin: 15px;
 }
 
+#Levels {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 400px;
+	margin-bottom: 25px;
+	padding-right: 20px;
+	overflow-x: hidden;
+}
+
 @media only screen and (max-width: 500px) {
-	#readyScreen {
+	#readyScreen, #FinishGame, #settingScreen, #changeSpaceShip {
 		padding: 5px;	
 	}
-	#FinishGame {
-		padding: 5px;
-	}
-	#settingScreen {
-		padding: 5px;
-	}
-	#changeSpaceShip {
-		padding: 5px;
-	}
+
 	h1 {
 		margin-top: 15vh;
 		font-size: 50px;
 	}
+
 	#chooseCharSpaceShip {
 		grid-template-columns: auto auto auto;
 	}
+
 	.itemGrid {
 		margin: 10px;
 	}
@@ -211,3 +188,5 @@ button:hover {
 .hidden {
 	display: none;
 }
+
+
