@@ -58,11 +58,9 @@
 		</div>
 	</div>
 	<div id="setLevel" style="display: none">
-		<button class="LevelBTN" id="Level1" onclick="ChooseLevel (1)">Level 1</button>
-		<button class="LevelBTN" id="Level2" onclick="ChooseLevel (2)">Level 2</button>
-		<button class="LevelBTN" id="Level3" onclick="ChooseLevel (3)">Level 3</button>
-		<button class="LevelBTN" id="Level4" onclick="ChooseLevel (4)">Level 4</button>
-		<button class="LevelBTN" id="Level5" onclick="ChooseLevel (5)">Level 5</button>
+		<div id="Levels">
+		</div>
+
 		<div style="display: flex;">
 			<button class="buttonSetting"  style="background-color: red !important;" onclick="{
 				document.getElementById ('setLevel').style.display = 'none';
@@ -72,7 +70,7 @@
 		</div>
 	</div>
 	<canvas id="canvas" style="display: none"></canvas>
-	<audio id="audioBG" style="display: none" controls="" autoplay>
+	<audio id="audioBG" style="display: none" controls="">
 		<source src="Background.mp3" type="audio/mpeg">
 	</audio>
 	<audio id="audioShoot" style="display: none" controls="">
