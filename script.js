@@ -4,13 +4,8 @@ const ctx = canvas.getContext ("2d");
 var SpaceShipArr = ["SpaceShip.png","Cat.png","Run.png","Aries.png","UFO.png","Monster.png"];
 var SpaceShipImg = "radio0";
 
-const LevelBTN = document.querySelectorAll (".LevelBTN");
-
 var spaceShip = [];
 var bullets = [];
-
-var temp_Level = 2;
-var Level = 2;
 
 init ();
 
@@ -32,17 +27,16 @@ function init () {
 				'<label class="itemGrid"><input id="radio'+index+'" type="radio" name="SpaceShipName" value="SpaceShip/'+SpaceShipArr[index]+'"><img src="SpaceShip/'+SpaceShipArr[index]+'"></label>'
 			);
 	});
-	/*for (var i=1; i<6; i++) {
-	
+	for (var i=1; i<1001; i++) {
+		$("#Levels").append (
+			'<button class="LevelBTN" id="Level'+i+'" onclick="ChooseLevel ('+i+')">Level '+i+'</button>'
+		)
 	}
-			<button class="LevelBTN" id="Level1" onclick="ChooseLevel (1)">Level 1</button>
-		<button class="LevelBTN" id="Level2" onclick="ChooseLevel (2)">Level 2</button>
-		<button class="LevelBTN" id="Level3" onclick="ChooseLevel (3)">Level 3</button>
-		<button class="LevelBTN" id="Level4" onclick="ChooseLevel (4)">Level 4</button>
-		<button class="LevelBTN" id="Level5" onclick="ChooseLevel (5)">Level 5</button>*/
-	//document.getElementById("radio0").checked = true;
 }
 
+const LevelBTN = document.querySelectorAll (".LevelBTN");
+var temp_Level = 2;
+var Level = 2;
 
 const mouse = {
 	x : 0,
@@ -55,10 +49,13 @@ var CanPlay = false;
 
 var myAudio = document.getElementById ("audioBG");
 myAudio.load ();
+myAudio.pause ();
 var shotAudio = document.getElementById ("audioShoot");
 shotAudio.load ();
+myAudio.pause ();
 var boomAudio = document.getElementById ("audioBoom");
 boomAudio.load ();
+myAudio.pause ();
 
 var speedSpaceShip = 0.9;
 
@@ -88,14 +85,12 @@ function CreatBullet (x,y) {
 	bullets.push (new bullet (x,y));
 }
 
-var TimeCreateSpaceShip = 2010;
+var TimeCreateSpaceShip = 2000;
 
 function LevelUp () {
 	if (CanPlay) {
 		setTimeout (LevelUp,20000/Level);
 		if (CreatFrame) {
-			if (TimeCreateSpaceShip > 1000)
-				TimeCreateSpaceShip -= 10;
 			speedSpaceShip += 0.1;
 		}
 	}
@@ -160,8 +155,7 @@ function animate() {
 			  ctx.font = "25px Arial";
 			  ctx.fillText ("Score: "+Score,4,28);  
 			  ctx.font = "16px Arial";
-			  ctx.fillText ("Spaceship's flight speed: "+speedSpaceShip.toFixed(1),4,window.innerHeight-15); 
-			  ctx.fillText ("New monster creation time: "+TimeCreateSpaceShip+" milisecond",4,window.innerHeight-32); 	
+			  ctx.fillText ("Flight speed: "+speedSpaceShip.toFixed(1),4,window.innerHeight-15); 
 			  
 		  }
 	}
@@ -187,18 +181,21 @@ function setCanvas () {
 }
 
 function PlayGame () {
-	setCanvas ();
-	CreatFrame = true;
-	CanPlay = true;
-	document.querySelector ("#readyScreen").style.display = "none";
-	canvas.style.display = "";
-	animate ();
-	CreatSpaceShip ();
-	myAudio.load ();
-	myAudio.play ();
-	document.body.style.backgroundColor = "white";
-	LevelUp ();
-	CanShot ();
+	setTimeout (() => {
+		setCanvas ();
+		CreatFrame = true;
+		CanPlay = true;
+		document.querySelector ("#readyScreen").style.display = "none";
+		canvas.style.display = "";
+		animate ();
+		CreatSpaceShip ();
+		myAudio.load ();
+		myAudio.play ();
+		document.body.style.backgroundColor = "white";
+		LevelUp ();
+		CanShot ();
+	},10);
+
 }
 
 function Setting() {
